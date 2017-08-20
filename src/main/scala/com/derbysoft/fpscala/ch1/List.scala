@@ -1,17 +1,26 @@
 package com.derbysoft.fpscala.ch1
 
-import java.io.File
-import java.util
-
-import scala.collection.JavaConversions._
-import org.apache.commons.io.{FileUtils, IOUtils}
+import scala.annotation.tailrec
 
 object List {
+  def f(n: BigInt): BigInt = {
+    if (n == 1) 1
+    else n * f(n - 1)
+  }
+
+  def ft(n: BigInt): BigInt = {
+    @tailrec
+    def tailrec2(n: BigInt, value: BigInt): BigInt = {
+      if (n == 1) value
+      else tailrec2(n - 1, (n - 1) * value)
+    }
+
+    tailrec2(n, n)
+  }
 
   def main(args: Array[String]): Unit = {
-    val fileName = "/Users/xinliwang/workspace/fpinscala/src/main/scala/com/derbysoft/fpscala/ch1/List.scala"
-    val iterator = FileUtils.lineIterator(new File(fileName), "UTF-8")
-    iterator.foreach(println)
-    iterator.close()
+    //    val i = f(5000)
+    val i = ft(6)
+    println(i)
   }
 }
